@@ -1,8 +1,31 @@
 <html>
+
 <head>
-	<title>Yo</title>
+    <title>Yo</title>
+    <script src="https://unpkg.com/papaparse@5.3.0/papaparse.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
-	<p>Nothing here</p>
+    <p>Nothing here</p>
+
+    <script>
+        var reqeust = $.ajax({
+            url: "https://docs.google.com/spreadsheets/d/1xzSWnA8jtY4dGkBwSFKVor_UvR7nQW9UwqO9UXp65vc/export?format=csv",
+            method: "GET",
+            success: function() {
+                console.log("good")
+            }
+        });
+
+        Papa.parse("https://docs.google.com/spreadsheets/d/1xzSWnA8jtY4dGkBwSFKVor_UvR7nQW9UwqO9UXp65vc/export?format=csv", {
+            download: true,
+            complete: function(results) {
+                console.log(results);
+            }
+        });
+    </script>
 </body>
+
 </html>
