@@ -192,6 +192,11 @@
             maxZoom: 21
         }).addTo(map);
 
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        //     maxZoom: 21
+        // }).addTo(map);
+
         var popupGlobal; // this is ok for debugging
 
         //handle click events
@@ -263,10 +268,10 @@
             // event listener for submit button
             button.on('click', function(e) {
                 console.log("in button listener")
-                var $form = popupDom.find("#input-form");
+                var $form = popupDom.find("#input-form")
                 var latlng = popup.getLatLng()
 
-                if (!/\p{Emoji}/u.test($form.find("#emoji_input").val())) {
+                if (!/\p{Extended_Pictographic}/u.test($form.find("#emoji_input").val())) {
                     console.log("No emoji selected")
 
                     if (!$form.find("#emoji_error").length)
@@ -274,6 +279,10 @@
 
                     return false
                 }
+
+                // make sure only one emoji
+                var emoji_input = $form.find("#emoji_input").val()
+                $form.find("#emoji_input").val(emoji_input.substring(0, 2))
 
                 // input in the coordinates
                 popupDom.find("#lat_input").val(latlng.lat)
